@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 声明处理器对象， 让他处理某个请求
+             class:处理器类的全限定名称
+             id：对象的名称， 对象的名称表示请求的uri地址。
+                要求以“/”开头，springmvc根据“/”判断当前的对象能否处理请求。
+                “/”是用来区别处理器对象和其他普通对象的。
+
+        -->
+    <!-- 配置式的方式 -->
+    <!-- 开启注解扫描 -->
+    <context:component-scan base-package="com.mylast.controller"/>
+    <!--视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--文件所在位置-->
+        <property name="prefix" value="/"/>
+        <!--文件后缀名-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--配置自定义转换器-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.mylast.utils.StringToDate">
+
+                </bean>
+            </set>
+        </property>
+    </bean>
+    <!--配置文件解析器对象-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"></property>
+    </bean>
+    <!--开启pring mvc注解支持-->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+</beans>
