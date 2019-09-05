@@ -12,6 +12,6 @@
 </head>
 <body>
 <a href="/info/self">查看学生个人信息</a>
-<a href="">查看学生成绩信息</a>
+<a href="/grades/geadeslist">查看学生成绩信息</a>
 </body>
 </html>

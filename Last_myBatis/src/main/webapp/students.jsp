@@ -16,6 +16,9 @@
         用户名<input name="name" />
     </div>
     <div>
+        学号：<input name="studentID"/>
+    </div>
+    <div>
         密&nbsp&nbsp码<input type="password" name="password"/>
     </div>
     <input type="submit" value="登录" />

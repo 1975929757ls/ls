@@ -30,14 +30,16 @@ public class admin {
         return "teachers";
     }
     @RequestMapping("/loginst")
-    public String login(String name,String password){
-        if(name.equals("") || password.equals("")){
+    public String login(String name,String studentID,String password,Model model){
+        int id=Integer.parseInt(studentID);
+        if(name.equals("") || password.equals("")||studentID.equals("")){
             return "false";
         }else {
-            Students students=studentServices.findBynameAndpassword(name,password);
-            if(students==null){
+            Students students1=studentServices.findnameidpassword(name,id,password);
+            if(students1==null){
                 return "false";
             }else{
+                model.addAttribute("student",students1);
                 return "st";
             }
         }

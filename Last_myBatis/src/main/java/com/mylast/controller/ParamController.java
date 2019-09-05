@@ -19,8 +19,8 @@ public class ParamController {
         return "success";
     }
     @RequestMapping(value = "/testRequestParam",method = {RequestMethod.GET})
-    public String testRequestParam(@RequestParam(name = "name") String value){
-        System.out.println(value);
+    public String testRequestParam(@RequestParam(name = "name") String value,@RequestParam(name = "st") String s){
+        System.out.println(value+s);
         return "success";
     }
     @RequestMapping(value = "/testRequestBody",method = {RequestMethod.POST})

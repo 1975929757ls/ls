@@ -12,7 +12,7 @@
 </head>
 <body>
 <h3>dfjhk</h3>
-<a href="param/testRequestParam?name=you">RequestParam</a>
+<a href="param/testRequestParam?name=you&st=you">RequestParam</a>
 <br>
 <form action="param/testRequestBody"method="post">
     <div>

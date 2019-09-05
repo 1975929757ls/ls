@@ -1,0 +1,137 @@
+/*
+SQLyog Ultimate v10.00 Beta1
+MySQL - 5.5.15 : Database - day17s
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`day17s` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `day17s`;
+
+/*Table structure for table `grades` */
+
+DROP TABLE IF EXISTS `grades`;
+
+CREATE TABLE `grades` (
+  `studentID` int(20) NOT NULL,
+  `CourseID` int(20) NOT NULL AUTO_INCREMENT,
+  `CourseName` varchar(50) DEFAULT NULL,
+  `num` int(20) DEFAULT NULL,
+  `teachername` varchar(30) DEFAULT NULL,
+  `studentname` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`studentID`,`CourseID`),
+  KEY `CourseID` (`CourseID`),
+  CONSTRAINT `grades_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `students` (`studentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `grades_ibfk_3` FOREIGN KEY (`CourseID`) REFERENCES `schooltimetable` (`CourseID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `grades` */
+
+insert  into `grades`(`studentID`,`CourseID`,`CourseName`,`num`,`teachername`,`studentname`) values (416,1,'数据库',100,'郝晓松','蒙发'),(416,2,'英语',89,'彭伟','蒙发'),(416,3,'高数',98,'崔洛','蒙发'),(416,5,'物理',98,'李依','蒙发'),(417,1,'数据库',67,'郝晓松','武浪浪'),(417,2,'英语',98,'彭伟','武浪浪');
+
+/*Table structure for table `manager` */
+
+DROP TABLE IF EXISTS `manager`;
+
+CREATE TABLE `manager` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `manager` */
+
+insert  into `manager`(`id`,`name`,`password`) values (1,'admin','admin'),(2,'李','1234');
+
+/*Table structure for table `schooltimetable` */
+
+DROP TABLE IF EXISTS `schooltimetable`;
+
+CREATE TABLE `schooltimetable` (
+  `CourseID` int(20) NOT NULL,
+  `CourseName` varchar(20) DEFAULT NULL,
+  `teacher` varchar(20) DEFAULT NULL,
+  `classroom` varchar(20) DEFAULT NULL,
+  `info` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `schooltimetable` */
+
+insert  into `schooltimetable`(`CourseID`,`CourseName`,`teacher`,`classroom`,`info`) values (1,'数据库','郝晓松','410','1到10周'),(2,'高数','崔洛','1102','1到10周'),(3,'英语','彭伟','112','1到10周'),(4,'数据结构','王爱丽','116','1到10周'),(5,'物理','李依','D2112','1到10周'),(6,'人工智能','李怡','2112','1到10周');
+
+/*Table structure for table `studentclass` */
+
+DROP TABLE IF EXISTS `studentclass`;
+
+CREATE TABLE `studentclass` (
+  `studentID` int(20) NOT NULL,
+  `CourseID` int(20) NOT NULL,
+  `CourseName` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`studentID`,`CourseID`),
+  KEY `studentclass_ibfk_2` (`CourseID`),
+  CONSTRAINT `studentclass_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `students` (`studentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `studentclass_ibfk_2` FOREIGN KEY (`CourseID`) REFERENCES `schooltimetable` (`CourseID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `studentclass` */
+
+insert  into `studentclass`(`studentID`,`CourseID`,`CourseName`) values (416,1,'数据库'),(416,2,'高数'),(416,3,'英语'),(416,4,'数据结构'),(416,5,'物理'),(416,6,'人工智能'),(417,1,'数据库'),(417,2,'高数');
+
+/*Table structure for table `students` */
+
+DROP TABLE IF EXISTS `students`;
+
+CREATE TABLE `students` (
+  `studentID` int(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `sex` varchar(10) NOT NULL,
+  `colege` varchar(50) NOT NULL,
+  `major` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  PRIMARY KEY (`studentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `students` */
+
+insert  into `students`(`studentID`,`name`,`password`,`sex`,`colege`,`major`,`phone`) values (416,'蒙发','1234','男','计算机科学学院','数字媒体','15877566091'),(417,'武浪浪','1234','男','计算机科学学院','数字媒体','1587765441'),(418,'彭伟','1234','男','管理学院','会计','17766899011'),(419,'雷京','1234','男','计算机','软件工程','13456743289'),(420,'宋维超','1234','女','计算机','软件工程','15877564067');
+
+/*Table structure for table `teacher` */
+
+DROP TABLE IF EXISTS `teacher`;
+
+CREATE TABLE `teacher` (
+  `teacherid` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`teacherid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `teacher` */
+
+/*Table structure for table `userstudent` */
+
+DROP TABLE IF EXISTS `userstudent`;
+
+CREATE TABLE `userstudent` (
+  `name` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `userstudent` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

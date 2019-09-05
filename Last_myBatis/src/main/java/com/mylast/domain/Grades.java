@@ -6,8 +6,8 @@ public class Grades {
     private String CourseName;
     private int num;
     private String teachername;
+    private String studentname;
     public Grades(){}
-
     public Grades(int studentID, int courseID, String courseName, int num, String teachername) {
         this.studentID = studentID;
         CourseID = courseID;
@@ -15,6 +15,14 @@ public class Grades {
         this.num = num;
         this.teachername = teachername;
     }
+    public String getStudentname() {
+        return studentname;
+    }
+
+    public void setStudentname(String studentname) {
+        this.studentname = studentname;
+    }
+
 
     public String getTeachername() {
         return teachername;
@@ -28,8 +36,8 @@ public class Grades {
         return CourseID;
     }
 
-    public void setCourseID(int courseID) {
-        CourseID = courseID;
+        public void setCourseID(int CourseID) {
+        this.CourseID = CourseID;
     }
     public int getStudentID() {
         return studentID;
@@ -62,7 +70,8 @@ public class Grades {
                 ", CourseID=" + CourseID +
                 ", CourseName='" + CourseName + '\'' +
                 ", num=" + num +
-                ", techername='" + teachername + '\'' +
+                ", teachername='" + teachername + '\'' +
+                ", studentname='" + studentname + '\'' +
                 '}';
     }
 }

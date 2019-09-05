@@ -23,6 +23,9 @@ public class StudentServices {
     public Students findBystudentID(int studentID){
         return studentsDao.findBstudentsID(studentID);
     }
+    public Students findnameidpassword(String name,int studnetID,String password){
+        return studentsDao.findBynameAndstudentID(name,studnetID,password);
+    }
     public void add(Students students){
         studentsDao.insertStudent(students);
     }
